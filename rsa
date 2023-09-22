@@ -1,16 +1,16 @@
-#!/bin/bash
-factor_c()
+#!/usr/bin/env bash
+cfactor()
 {
 	if [ $# -ne 3 ];
         then
                 arg=("$@")
                 c=0
                 num_2=1
-                for k in ${arg[*]};
+                for j in ${arg[*]};
                 do
                         if [ $c -gt 1 ];
                         then
-                                num_2=$(echo $k*$num_2 | bc)
+                                num_2=$(echo $j*$num_2 | bc)
                         fi
                         c=$((c + 1))
                 done
@@ -33,15 +33,15 @@ factor_c()
 
 if [ $# -ne 1 ]
 then
-        echo 'Usage: factors <file>'
+        echo 'Usage: rsa <file>'
         exit 1
 else
 
         while read i
         do
 
-                re=$(factor "$i")
-                factor_c $res
+                res=$(factor "$i")
+                cfactor $res
 
         done < "$1"
 fi
